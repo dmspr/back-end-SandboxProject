@@ -68,10 +68,10 @@ function DeleteEvent(req, res) {
 }
 
 function updateEvent(req, res) {
-    let updateQuery = "UPDATE event SET Event_name = '" + req.body.Event_name + "',lokasi='" + req.body.lokasi + "',Date='" + req.body.Date + "',Deskripsi='" + req.body.Deskripsi + "' WHERE id =" + req.params.id;
+    let updateQuery = `UPDATE products SET nameEvent = ?, organized = ?, date = ?, katagori = ?, location =?, price=?, ticket=?, description=? WHERE id = ?`
 
-
-    db.query(updateQuery, function (error, result, updated) {
+    let data = [req.body.nameEvent, req.body.organized, req.body.date, req.body.katagori, req.body.location, req.body.price, req.body.ticket, req.body.description, req.params.id]
+    db.query(updateQuery, data, function (error, result, updated) {
         if (error) throw error;
         res.send({ message: 'Data has been updated', updated })
     });
@@ -80,6 +80,14 @@ function updateEvent(req, res) {
 
 function listEvent(req, res) {
     let selectQuery = `SELECT * FROM products`;
+
+    db.query(selectQuery, function (error, results, fields) {
+        if (error) throw error;
+        res.send({ results })
+    });
+}
+function listEventSeminar(req, res) {
+    let selectQuery = `SELECT * FROM products where katagori=seminar`;
 
     db.query(selectQuery, function (error, results, fields) {
         if (error) throw error;
@@ -105,6 +113,7 @@ module.exports = {
     DeleteEvent,
     updateEvent,
     listEvent,
+    listEventSeminar,
     listEventId
 }
 

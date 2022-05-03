@@ -15,13 +15,13 @@ function LoginUser(req, res) {
                 if (error) throw error;
                 // Information about users saved to payload
                 const payload = {
-                    id: results.id,
-                    email: results.email,
+                    id: results[0].id,
+                    email: results[0].email,
                 }
 
                 const token = jwt.sign(payload, 'secret', { expiresIn: '7d' })
 
-                return res.send({ token: token })
+                return res.send({ token: token, payload })
             }
         }
 

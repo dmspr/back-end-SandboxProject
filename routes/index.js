@@ -11,12 +11,16 @@ router.get('/', (req, res) => {
 })
 
 router.post('/login', loginRoute.LoginUser);
-// router.get('/dashboard/:id', authMiddleware.isAuthenticate,loginRoute.GetUser)
+router.get('/dashboard/:id', loginRoute.GetUser)
 router.post('/register', serviceRoute.CreateUser)
 
 router.post('/make-event', serviceRoute.AddEvent)
 router.get('/list-event', serviceRoute.listEvent)
 router.get('/list-event/:id', serviceRoute.listEventId)
+router.put('/update_event/:id', serviceRoute.updateEvent)
+router.get('list-event/seminar')
+
+
 router.delete('/delete-event/:id', serviceRoute.DeleteEvent)
 
 
@@ -24,7 +28,7 @@ router.delete('/delete-event/:id', serviceRoute.DeleteEvent)
 router.delete('/delete_User/:id', authMiddleware.isAuthenticate, serviceRoute.DeleteUser)
 router.post('/add_Event', authMiddleware.isAuthenticate, serviceRoute.AddEvent)
 
-router.put('/update_Event/:id', authMiddleware.isAuthenticate, serviceRoute.updateEvent)
+
 
 
 module.exports = router;
