@@ -17,7 +17,7 @@ router.post('/register', serviceRoute.CreateUser)
 router.post('/make-event', serviceRoute.AddEvent)
 router.get('/list-event', serviceRoute.listEvent)
 router.get('/list-event/:id', serviceRoute.listEventId)
-router.put('/update_event/:id', serviceRoute.updateEvent)
+router.put('/update-event/:id', serviceRoute.updateEvent)
 router.get('list-event/seminar')
 
 
